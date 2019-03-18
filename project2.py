@@ -11,6 +11,7 @@ import re
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import ssl
+import os
 
 ## PART 1  - Complete grab_headlines
 ## INPUT: soup - the soup object to process
@@ -95,7 +96,9 @@ def getSoupObjFromURL(url):
 
 def getSoupObjFromFile(fileName):
     """ return a soup object from the file with the passed fileName"""
-    file = open(fileName, 'r')
+    source_dir = os.path.dirname(__file__) #<-- directory name
+    full_path = os.path.join(source_dir, fileName)
+    file = open(full_path,'r')
     text = file.read().strip()
     file.close()
     soup = BeautifulSoup(text, "html.parser")
